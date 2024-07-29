@@ -2,19 +2,20 @@ import { Injectable } from "@nestjs/common";
 import { CreateMusicDto } from "./dto/create-music.dto";
 import { UpdateMusicDto } from "./dto/update-music.dto";
 import { InjectRepository } from "@nestjs/typeorm";
-import {  Musicentity } from "./entities/music.entity";
+import {  MusicEntity,  } from "./entities/music.entity";
 import { Repository } from "typeorm";
 
 @Injectable()
 export class MusicRepository {
     constructor(
-        @InjectRepository(Musicentity)
-        private musicRepoitory: Repository<Musicentity>
+        @InjectRepository(MusicEntity)
+        private musicRepoitory: Repository<MusicEntity>
     ) {}
  async create(createMusicDto: CreateMusicDto) {
     
+     this.musicRepoitory.create(createMusicDto)
+    return await this.musicRepoitory.save(createMusicDto)
 
-    return await this.musicRepoitory.create(createMusicDto)
   }
 
   async findAll() {
@@ -32,6 +33,6 @@ export class MusicRepository {
   }
 
   async remove(id: number) {
-    return await this.musicRepoitory.delete(id)
+    return await this.musicRepoitory.softDelete(id)
   }
 }

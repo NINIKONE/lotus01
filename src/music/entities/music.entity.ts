@@ -1,7 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Musicentity {
+export class MusicEntity {
     @PrimaryGeneratedColumn()
     id : number;
 
@@ -12,5 +12,8 @@ export class Musicentity {
     artistId : string;
 
     @Column({type  : "decimal",  scale: 2})
-    duration : number
+    duration : number;
+
+    @DeleteDateColumn()
+    deletedat: Date | null
 }
