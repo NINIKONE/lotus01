@@ -2,42 +2,36 @@ import { Injectable } from "@nestjs/common";
 import { CreateMusicDto } from "./dto/create-music.dto";
 import { UpdateMusicDto } from "./dto/update-music.dto";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Music } from "./entities/music.entity";
+import {  Musicentity } from "./entities/music.entity";
 import { Repository } from "typeorm";
 
 @Injectable()
 export class MusicRepository {
     constructor(
-        @InjectRepository(Music)
-        private musicRepoitory: Repository<Music>
+        @InjectRepository(Musicentity)
+        private musicRepoitory: Repository<Musicentity>
     ) {}
-  create(createMusicDto: CreateMusicDto) {
-    const newMusic = new Music();
-    newMusic.name = createMusicDto.name;
-    newMusic.artistId = createMusicDto.artistId;
-    newMusic.duration = createMusicDto.duration
+ async create(createMusicDto: CreateMusicDto) {
+    
 
-    return this.musicRepoitory.save(newMusic)
+    return await this.musicRepoitory.create(createMusicDto)
   }
 
-  findAll() {
-    return this.musicRepoitory.find()
+  async findAll() {
+    return await this.musicRepoitory.find()
   }
 
-  findOne(id: number) {
-    return this.musicRepoitory.findOneBy({id})
+  async findOne(id: number) {
+    return await this.musicRepoitory.findOneBy({id})
   }
 
-  update(id: number, updateMusicDto: UpdateMusicDto) {
-    const updatedMusuc = new Music();
-    updatedMusuc.artistId = updateMusicDto.artistId;
-    updatedMusuc.duration = updateMusicDto.duration;
-    updatedMusuc.name = updateMusicDto.name;
+  async update(id: number, updateMusicDto: UpdateMusicDto) {
+    
 
-    return this.musicRepoitory.update(id, updatedMusuc)
+    return await this.musicRepoitory.update(id, updateMusicDto)
   }
 
-  remove(id: number) {
-    return this.musicRepoitory.delete(id)
+  async remove(id: number) {
+    return await this.musicRepoitory.delete(id)
   }
 }
