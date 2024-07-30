@@ -7,14 +7,7 @@ import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [MusicModule, TypeOrmModule.forRoot({
-    type: 'mysql',
-    host: 'localhost',
-    port: 3306,
-    username: 'root',
-    password: 'msn10911',
-    database: 'homework',
-    autoLoadEntities: true,
-    synchronize: true 
+  
   }), SearchModule,],
   controllers: [AppController],
   providers: [AppService],
