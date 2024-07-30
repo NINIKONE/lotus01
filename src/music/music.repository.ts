@@ -34,5 +34,13 @@ export class MusicRepository {
 
   async remove(id: number) {
     return await this.musicRepoitory.softDelete(id)
+
+    
+  }
+  async search(query: string) {
+    return await this.musicRepoitory
+    .createQueryBuilder('music')
+    .where('music.name LIKE :query', {query: `%${query}%`})
+    .getMany()
   }
 }
