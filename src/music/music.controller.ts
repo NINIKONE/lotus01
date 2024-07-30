@@ -9,6 +9,7 @@ export class MusicController {
 
   @Post()
   async create(@Body() createMusicDto: CreateMusicDto) {
+    
     return  await this.musicService.create(createMusicDto);
   }
 
